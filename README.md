@@ -7,7 +7,7 @@ A comparison of tools that convert images to ascii/ansi art
 * [img2xterm](https://github.com/rossy/img2xterm)
 * [util-say](https://github.com/maandree/util-say/)
 * [catimg](https://github.com/posva/catimg) (C and Bash versions)
-* [manytools](https://github.com/maandree/util-say/)
+* [manytools](http://manytools.org/hacker-tools/convert-images-to-ascii-art/)
 * [img-cat](https://github.com/saikobee/img-cat/)
 * [img2txt](http://manpages.ubuntu.com/manpages/hardy/man1/img2txt.1.html)
 * [aview](http://aa-project.sourceforge.net/aview/)
@@ -26,5 +26,3 @@ A comparison of tools that convert images to ascii/ansi art
 ### Build A Markdown [Report](https://github.com/solarkennedy/ascii-art-converter-comparison/blob/master/report.md)
 
     make report
-
-

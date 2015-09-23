@@ -23,7 +23,7 @@ RUN wget -O util-say.zip https://github.com/maandree/util-say/archive/master.zip
   && cd .. && rm -rf util-say-master util-say.zip
 
 # [catimg](https://github.com/posva/catimg) (C and Bash versions)
-RUN apt-get -y install cmake
+RUN apt-get -y install cmake imagemagick
 RUN wget -O catimg.zip https://github.com/posva/catimg/archive/master.zip \
   && unzip catimg.zip \
   && cd catimg-master \
@@ -34,13 +34,11 @@ RUN wget -O catimg.zip https://github.com/posva/catimg/archive/master.zip \
 
 # [img-cat](https://github.com/saikobee/img-cat/)
 RUN apt-get -y install npm
+RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install -g img-cat
 
 # [img2txt](http://manpages.ubuntu.com/manpages/hardy/man1/img2txt.1.html)
 RUN apt-get -y install caca-utils
-
-# [aview](http://aa-project.sourceforge.net/aview/)
-RUN apt-get -y install aview
 
 # [jp2a](https://csl.name/jp2a/)
 RUN apt-get -y install jp2a

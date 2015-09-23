@@ -27,7 +27,7 @@ function catimg-bash() {
 }
 
 function img-cat() {
-  /usr/bin/catimg $1 >$2
+  /usr/local/bin/img-cat $1 >$2
 }
 
 function img2txt() {

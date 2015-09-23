@@ -17,9 +17,9 @@ RUN apt-get -y install default-jdk default-jre texinfo
 RUN wget -O util-say.zip https://github.com/maandree/util-say/archive/master.zip \
   && unzip util-say.zip \
   && cd util-say-master \
+  && make \
   && cp img2ponysay /usr/bin/ \
-  && cp img2cowsay /usr/bin/ \
-  && cp img2unisay /usr/bin/ \
+  && cp util-say.jar /usr/bin/ \
   && cd .. && rm -rf util-say-master util-say.zip
 
 # [catimg](https://github.com/posva/catimg) (C and Bash versions)
@@ -29,6 +29,7 @@ RUN wget -O catimg.zip https://github.com/posva/catimg/archive/master.zip \
   && cd catimg-master \
   && cmake . \
   && cp catimg /usr/bin/catimg.bash \
+  && cp catimg-ext-colors.png /usr/bin/ \
   && make install \
   && cd .. && rm -rf catimg-master catimg.zip
 

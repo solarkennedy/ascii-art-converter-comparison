@@ -1,3 +1,5 @@
+report: screenshots
+
 build:
 	docker build -t ascii-art-comparison .
 
@@ -6,8 +8,6 @@ ascii-output: build
 
 screenshots: build inputs
 	./screenshots.sh
-
-report: screenshots
 
 inputs: inputs/bender.png
 

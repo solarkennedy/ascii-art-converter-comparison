@@ -6,7 +6,9 @@ function take_screenshot {
   echo "Taking a screenshot of $input and saving it into $output"
   xterm -maximized -e "echo hi && cat $input && read" &
   sleep .5s
-  import -window "$(xdotool search --class xterm)" $output
+  window_id=$(xdotool search --class xterm | head)
+  import -window "$window_id" /tmp/screenshot.png
+  convert /tmp/screenshot.png -trim -background Grey -gravity Center -pointsize 48 label:"Method: $method" +swap -append $output
   killall xterm
 }
 

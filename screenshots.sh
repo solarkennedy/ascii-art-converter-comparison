@@ -12,6 +12,12 @@ function take_screenshot {
   killall xterm
 }
 
+function save_original {
+  local input=$1
+  local output=$2
+  convert $input -trim -resize 600% -background Grey -gravity Center -pointsize 48 label:"Original" +swap -append $output
+}
+
 methods="
 img2xterm
 util-say
@@ -31,4 +37,5 @@ for input in inputs/*.png; do
     output_filename="outputs/${short_filename}.${method}.png"
     take_screenshot $input_filename $output_filename
   done
+  save_original $input "outputs/${short_filename}.original.png"
 done

@@ -1,4 +1,5 @@
-report: screenshots
+report:
+	./report.sh
 
 build:
 	docker build -t ascii-art-comparison .

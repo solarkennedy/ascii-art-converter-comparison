@@ -27,18 +27,19 @@ function catimg-bash() {
 }
 
 function img-cat() {
-  /usr/local/bin/img-cat $1 >$2
+  convert -resize 50% $1 /tmp/imgcat.out.png
+  /usr/local/bin/img-cat /tmp/imgcat.out.png >$2
 }
 
 function img2txt() {
-  /usr/bin/img2txt $1 >$2
+  /usr/bin/img2txt --width=160 $1 >$2
 }
 
 function jp2a() {
   filename=$(basename "$1")
   short_filename="${filename%.*}"
   convert $1 /tmp/${short_filename}.jpg
-  /usr/bin/jp2a /tmp/${short_filename}.jpg > $2
+  /usr/bin/jp2a --width=160 /tmp/${short_filename}.jpg > $2
 }
 
 function make_ascii () {

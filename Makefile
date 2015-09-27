@@ -15,8 +15,8 @@ screenshots:
 inputs: inputs/bender.png inputs/lenna.png inputs/nyan.png
 
 inputs/bender.png:
-	wget -O /tmp/input.png https://upload.wikimedia.org/wikipedia/en/a/a6/Bender_Rodriguez.png
-	convert -resize 160 /tmp/input.png $@
+	wget -O /tmp/input.jpg http://cdn.meme.am/images/300x/5090397.jpg
+	convert -resize 160 /tmp/input.jpg $@
 
 inputs/lenna.png:
 	wget -O /tmp/input.png https://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png

@@ -9,12 +9,19 @@ ascii-output: build
 screenshots: build inputs
 	./screenshots.sh
 
-inputs: inputs/bender.png
+inputs: inputs/bender.png inputs/lenna.png inputs/nyan.png
 
 inputs/bender.png:
-	wget -O inputs/bender.png https://upload.wikimedia.org/wikipedia/en/a/a6/Bender_Rodriguez.png
-	convert -size 160 inputs/bender.png inputs/bender-resized.png
-	mv inputs/bender-resized.png inputs/bender.png
+	wget -O /tmp/input.png https://upload.wikimedia.org/wikipedia/en/a/a6/Bender_Rodriguez.png
+	convert -size 160 /tmp/input.png $@
+
+inputs/lenna.png:
+	wget -O /tmp/input.png https://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png
+	convert -size 160 $@
+
+inputs/nyan.png:
+	wget -O /tmp/input.png https://upload.wikimedia.org/wikipedia/en/e/ed/Nyan_cat_250px_frame.PNG
+	convert -size 160 $@
 
 clean:
 	git clean -fx

@@ -3,7 +3,10 @@ report: screenshots
 build:
 	docker build -t ascii-art-comparison .
 
-ascii-output: build
+debug:
+	docker run -t -i -v $(PWD)/inputs:/inputs:ro -v $(PWD)/ascii:/ascii:rw -v $(PWD)/go.sh:/go.sh:ro  ascii-art-comparison bash
+
+ascii: build
 	docker run -t -i -v $(PWD)/inputs:/inputs:ro -v $(PWD)/ascii:/ascii:rw -v $(PWD)/go.sh:/go.sh:ro  ascii-art-comparison /go.sh
 
 screenshots:

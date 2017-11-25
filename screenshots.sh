@@ -20,12 +20,9 @@ function save_original {
 
 methods="
 img2xterm
-util-say
-catimg
-catimg-bash
-img-cat
-img2txt
-jp2a
+termplay
+TerminalImageViewer
+pixterm
 "
 
 for input in inputs/*.png; do

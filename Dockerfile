@@ -12,34 +12,30 @@ RUN wget -O img2xterm.zip https://github.com/rossy/img2xterm/archive/master.zip 
   && make install \
   && cd .. && rm -rf img2xterm-master img2xterm.zip
 
-# [util-say](https://github.com/maandree/util-say/)
-RUN apt-get -y install default-jdk default-jre texinfo
-RUN wget -O util-say.zip https://github.com/maandree/util-say/archive/master.zip \
-  && unzip util-say.zip \
-  && cd util-say-master \
-  && make \
-  && cp img2ponysay /usr/bin/ \
-  && cp util-say.jar /usr/bin/ \
-  && cd .. && rm -rf util-say-master util-say.zip
+# [termplay](https://github.com/jD91mZM2/termplay)
+RUN apt-get -y install curl
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+ENV PATH $PATH:/root/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/
+RUN apt-get -y install libopenal-dev libsndfile1-dev
+RUN cargo install termplay --no-default-features
+  
+# [TerminalImageViewer](https://github.com/stefanhaustein/TerminalImageViewer)
+RUN apt-get -y install imagemagick
+RUN wget -O tiv.zip https://github.com/stefanhaustein/TerminalImageViewer/archive/master.zip \
+  && unzip tiv.zip \
+  && cd TerminalImageViewer-master/src/main/cpp \
+  && make && make install 
 
-# [catimg](https://github.com/posva/catimg) (C and Bash versions)
-RUN apt-get -y install cmake imagemagick
-RUN wget -O catimg.zip https://github.com/posva/catimg/archive/master.zip \
-  && unzip catimg.zip \
-  && cd catimg-master \
-  && cmake . \
-  && cp catimg /usr/bin/catimg.bash \
-  && cp catimg-ext-colors.png /usr/bin/ \
-  && make install \
-  && cd .. && rm -rf catimg-master catimg.zip
+# [pixterm](https://github.com/eliukblau/pixterm)
+RUN apt-get -y install git
+RUN curl -O https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz \
+  && tar -C /usr/local -xzf go1.9.2.linux-amd64.tar.gz \
+  && rm go1.9.2.linux-amd64.tar.gz
+RUN mkdir /root/gocode && GOPATH=/root/gocode /usr/local/go/bin/go get -u github.com/eliukblau/pixterm
 
-# [img-cat](https://github.com/saikobee/img-cat/)
-RUN apt-get -y install npm
-RUN ln -s /usr/bin/nodejs /usr/bin/node
-RUN npm install -g img-cat
-
-# [img2txt](http://manpages.ubuntu.com/manpages/hardy/man1/img2txt.1.html)
-RUN apt-get -y install caca-utils
-
-# [jp2a](https://csl.name/jp2a/)
-RUN apt-get -y install jp2a
+# [timg](https://github.com/hzeller/timg)
+RUN apt-get -y install libwebp-dev libgraphicsmagick++-dev
+RUN wget -O timg.zip https://github.com/hzeller/timg/archive/v0.9.5.zip \
+  && unzip timg.zip \
+  && cd timg-0.9.5/src \
+  && make && make install

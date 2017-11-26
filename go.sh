@@ -2,44 +2,30 @@
 
 methods="
 img2xterm
-util-say
-catimg
-catimg-bash
-img-cat
-img2txt
-jp2a
+termplay
+TerminalImageViewer
+pixterm
+timg
 "
 
 function img2xterm() {
   /usr/local/bin/img2xterm $1 >$2
 }
 
-function util-say() {
-  /usr/bin/img2ponysay  -- $1 | grep -v '\$' >$2
+function termplay() {
+  /root/.cargo/bin/termplay image -h 160 -w 160 --ratio 178 $1 >$2
 }
 
-function catimg() {
-  /usr/local/bin/catimg $1 >$2
+function TerminalImageViewer() {
+  script --return -c "/usr/local/bin/tiv -w 160 -h 160 -f $1.upscale" /dev/null | grep -v 'null' >$2
 }
 
-function catimg-bash() {
-  /usr/bin/catimg.bash $1 >$2
+function pixterm() {
+  script --return -c "/root/gocode/bin/pixterm -tr 80 -tc 160 -s 1 $1" /dev/null | grep -v 'null' > $2
 }
 
-function img-cat() {
-  convert -resize 50% $1 /tmp/imgcat.out.png
-  /usr/local/bin/img-cat /tmp/imgcat.out.png >$2
-}
-
-function img2txt() {
-  /usr/bin/img2txt --width=160 $1 >$2
-}
-
-function jp2a() {
-  filename=$(basename "$1")
-  short_filename="${filename%.*}"
-  convert $1 /tmp/${short_filename}.jpg
-  /usr/bin/jp2a --width=160 /tmp/${short_filename}.jpg > $2
+function timg() {
+  /usr/local/bin/timg -g 160x160 $1 >$2
 }
 
 function make_ascii () {
@@ -48,7 +34,8 @@ function make_ascii () {
       filename=$(basename "$input")
       short_filename="${filename%.*}"
       output_filename="/ascii/${short_filename}.${method}.ascii"
-      $method $input $output_filename
+      echo $input using $method
+      time $method $input $output_filename
     done
   done
 }

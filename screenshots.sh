@@ -1,15 +1,16 @@
 #!/bin/bash
+set -x
 
 function take_screenshot {
   local input=$1
   local output=$2
   echo "Taking a screenshot of $input and saving it into $output"
-  xterm -maximized -e "echo hi && cat $input && read" &
-  sleep .5s
-  window_id=$(xdotool search --class xterm | head)
+  stterm -f "Ubuntu Mono:size=10" -g 200x200 -e /bin/bash -c "sleep 1s && cat $input && sleep infinity" &
+  sleep 2s
+  window_id=$(xdotool search --class stterm | head)
   import -window "$window_id" /tmp/screenshot.png
   convert /tmp/screenshot.png -trim -background Grey -gravity Center -pointsize 48 label:"Method: $method" +swap -append $output
-  killall xterm
+  killall stterm
 }
 
 function save_original {
@@ -23,6 +24,7 @@ img2xterm
 termplay
 TerminalImageViewer
 pixterm
+timg
 "
 
 for input in inputs/*.png; do

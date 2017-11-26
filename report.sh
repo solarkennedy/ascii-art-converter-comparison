@@ -15,6 +15,7 @@ img2xterm
 termplay
 TerminalImageViewer
 pixterm
+timg
 "
 
 for input in inputs/*.png; do
